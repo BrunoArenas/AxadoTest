@@ -1,0 +1,60 @@
+﻿@using Axado.ViewModel
+@model List<RatingViewModel>
+
+@{
+    ViewBag.Title = "View";
+}
+@section Scripts{
+    <script type="text/javascript">
+        function rateCarrier(id)
+            {
+            $.ajax({
+                type: "POST",
+                url: "/Rating/Rate/",
+                data: "idCarrier=" + id,
+                success: function () {
+                    alert('Thank you for Rating!');
+                    window.location='/Rating/Index';
+                }
+            });
+            }
+    </script>
+
+}
+<h2>Ratings List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Carriers")
+        </th>
+        <th>
+            @Html.DisplayName("Rating Percentage")
+        </th>
+        <th>
+            @Html.DisplayName("Rating Quantity")
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CarrierName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Percent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rates)
+            </td>
+            <td>
+                <button id="btnRateThisCarrier" onclick="rateCarrier(@item.CarrierId)"> Rate This Carrier</button>
+            </td>
+        </tr>
+    }
+
+</table>

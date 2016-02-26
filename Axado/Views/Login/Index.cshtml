@@ -1,0 +1,29 @@
+﻿@model Axado.Models.User
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+    <script>
+        function Cadastrar() {
+            window.location='/User/Create';
+            };
+    </script>
+}
+
+<h2>Login</h2>
+<form action="@Url.Action("Login", "Login")" method="post">
+    <div>
+        <br />
+        @Html.Label("Name")
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @id = "txtName" } })
+        @Html.Label("Password")
+        @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @id = "txtPassowrd" }, placeholder = "Password" })
+        <br />
+        <input type="submit" value="Login" />
+        <input type="button" value="New User" id="btnCadastro" onclick="Cadastrar();" />
+    </div>
+</form>
